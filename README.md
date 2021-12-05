@@ -1,6 +1,11 @@
-## To Start
+## mongodb-sample-api
 
-# https://auth0.com/blog/node-js-and-typescript-tutorial-build-a-crud-api/
+Using the mongoDb sample data, this api will be a ongoing project to implement a MongoDb,
+Mongoose, typescript Api to check all possible options of this tools.
+
+<hr>
+
+To start: https://auth0.com/blog/node-js-and-typescript-tutorial-build-a-crud-api/
 
 1. npm init
 
@@ -22,3 +27,7 @@ To use TypeScript effectively, you need to install type definitions for the pack
 4. npm i -D @types/node @types/express @types/dotenv @types/cors @types/helmet
 
 5. npm i -D ts-node-dev
+
+## services
+
+A service lets you encapsulate related business logic that you can share across multiple projects. As such, your application can use a service to access and manipulate records from your store.
