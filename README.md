@@ -1,7 +1,7 @@
 ## mongodb-sample-api
 
-Using the mongoDb sample data, this api will be a ongoing project to implement a MongoDb,
-Mongoose, typescript Api to check all possible options of this tools.
+Using the mongoDb sample data, this api will be a ongoing project to implement a MongoDb
+(with full mongoDB drivers), typescript Api to check all possible options of this tools.
 
 <hr>
 
