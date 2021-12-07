@@ -1,4 +1,5 @@
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
+import { Company, Filters, AirSearchCompany, GetAirCompanies } from '../interfaces/air.interfaces';
 
 let companies: any;
 const DEFAULT_SORT = [['tomatoes.viewer.numReviews', -1]];
@@ -21,7 +22,7 @@ export default class AirDAO {
    * @returns {getAirCompanies} An object with movie results and total results
    * that would match this query
    */
-  static async getAirCompanies(): Promise<GetAirCompanies> {
+  static async getAirCompanies(airSearchConfig: AirSearchCompany): Promise<GetAirCompanies> {
     try {
       const pipeline = [
         {
@@ -55,60 +56,40 @@ export default class AirDAO {
         },
         {
           $sort: {
-            count: -1,
+            count: 1,
           },
         },
         {
-          $limit: 5,
+          $skip: airSearchConfig.page * airSearchConfig.MOVIES_PER_PAGE,
+        },
+        {
+          $limit: airSearchConfig.MOVIES_PER_PAGE,
         },
       ];
 
       // Use a more durable Read Concern here to make sure this data is not stale.
       const readConcern = { level: 'majority' };
-      const _companies: Company[] = await (
-        await companies.aggregate(pipeline, {
-          readConcern,
-        })
-      ).toArray();
+      const cursor = await companies.aggregate(pipeline, {
+        readConcern,
+      });
+
+      const _companies: Company[] = await cursor.toArray();
       const totalNumResults: number = await companies.countDocuments();
 
-      return { companiesList: _companies, totalNumResults };
+      return {
+        companiesList: _companies,
+        totalNumResults,
+        page: airSearchConfig.page,
+        entries_per_page: airSearchConfig.MOVIES_PER_PAGE,
+      };
     } catch (e) {
       console.error(`Unable to convert cursor to array or problem counting documents, ${e}`);
-      return { companiesList: [], totalNumResults: 0 };
+      return {
+        companiesList: [],
+        totalNumResults: 0,
+        page: 0,
+        entries_per_page: 0,
+      };
     }
   }
-}
-
-interface Company {
-  _id: ObjectId;
-  name: string;
-  permalink: string;
-  crunchbase_url: string;
-  homepage_url: string;
-  blog_url: string;
-  blog_feed_url: string;
-  twitter_username: string;
-  category_code: string;
-  number_of_employees: number;
-  founded_year: number;
-  founded_month: number;
-  founded_day: number;
-  deadpooled_year: number;
-  deadpooled_month: number;
-  deadpooled_day: number;
-  deadpooled_url: string;
-  tag_list: string;
-  alias_list: string;
-  email_address: string;
-  phone_number: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  overview: string;
-}
-
-interface GetAirCompanies {
-  companiesList: Company[];
-  totalNumResults: number;
 }
