@@ -65,7 +65,7 @@ export default class AirDAO {
 
       // Use a more durable Read Concern here to make sure this data is not stale.
       const readConcern = { level: 'majority' };
-      const _companies: Company[] = (
+      const _companies: Company[] = await (
         await companies.aggregate(pipeline, {
           readConcern,
         })
