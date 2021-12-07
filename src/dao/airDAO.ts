@@ -60,10 +60,10 @@ export default class AirDAO {
           },
         },
         {
-          $skip: airSearchConfig.page * airSearchConfig.MOVIES_PER_PAGE,
+          $skip: airSearchConfig.page * airSearchConfig.VALUES_PER_PAGE,
         },
         {
-          $limit: airSearchConfig.MOVIES_PER_PAGE,
+          $limit: airSearchConfig.VALUES_PER_PAGE,
         },
       ];
 
@@ -80,7 +80,7 @@ export default class AirDAO {
         companiesList: _companies,
         totalNumResults,
         page: airSearchConfig.page,
-        entries_per_page: airSearchConfig.MOVIES_PER_PAGE,
+        entries_per_page: airSearchConfig.VALUES_PER_PAGE,
       };
     } catch (e) {
       console.error(`Unable to convert cursor to array or problem counting documents, ${e}`);

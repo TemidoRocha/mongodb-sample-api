@@ -8,7 +8,7 @@ export interface Filters {
 
 export interface AirSearchCompany {
   page: number;
-  MOVIES_PER_PAGE: number;
+  VALUES_PER_PAGE: number;
 }
 
 export interface Company {

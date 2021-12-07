@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 export default class AirServices {
   static airSearchCompany(req: Request, res: Response): AirSearchCompany {
-    const MOVIES_PER_PAGE = 20;
+    const VALUES_PER_PAGE = 20;
     let page: number;
     try {
       page = req.query.page ? parseInt(req.query.page as string, 10) : 0;
@@ -14,7 +14,7 @@ export default class AirServices {
 
     return {
       page,
-      MOVIES_PER_PAGE,
+      VALUES_PER_PAGE,
     };
   }
 }
