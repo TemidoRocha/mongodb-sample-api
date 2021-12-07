@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { Company, Filters, AirSearchCompany, GetAirCompanies } from '../interfaces/air.interfaces';
+import { Company, Filters, Pagination, GetAirCompanies } from '../interfaces/air.interfaces';
 
 let companies: any;
 const DEFAULT_SORT = [['tomatoes.viewer.numReviews', -1]];
@@ -22,7 +22,7 @@ export default class AirDAO {
    * @returns {getAirCompanies} An object with movie results and total results
    * that would match this query
    */
-  static async getAirCompanies(airSearchConfig: AirSearchCompany): Promise<GetAirCompanies> {
+  static async getAirCompanies(airSearchConfig: Pagination): Promise<GetAirCompanies> {
     try {
       const pipeline = [
         {

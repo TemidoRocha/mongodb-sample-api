@@ -6,7 +6,7 @@ export interface Filters {
   text?: string;
 }
 
-export interface AirSearchCompany {
+export interface Pagination {
   page: number;
   VALUES_PER_PAGE: number;
 }

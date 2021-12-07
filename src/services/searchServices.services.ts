@@ -1,8 +1,8 @@
-import { AirSearchCompany } from '../interfaces/air.interfaces';
+import { Pagination } from '../interfaces/air.interfaces';
 import { Request, Response } from 'express';
 
-export default class AirServices {
-  static airSearchCompany(req: Request, res: Response): AirSearchCompany {
+export default class SearchServices {
+  static searchPagination(req: Request, res: Response): Pagination {
     const VALUES_PER_PAGE = 20;
     let page: number;
     try {
