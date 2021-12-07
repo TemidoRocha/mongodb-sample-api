@@ -21,17 +21,38 @@ export default class AirDAO {
    * @returns {getAirCompanies} An object with movie results and total results
    * that would match this query
    */
-  static async getAirCompanies<GetAirCompanies>() {
+  static async getAirCompanies(): Promise<GetAirCompanies> {
     try {
       const pipeline = [
-        // {
-        //   $group: {
-        //     _id: '$email',
-        //     count: {
-        //       $sum: 1,
-        //     },
-        //   },
-        // },
+        {
+          $project: {
+            _id: 0,
+            name: 1,
+            permalink: 1,
+            crunchbase_url: 1,
+            homepage_url: 1,
+            blog_url: 1,
+            blog_feed_url: 1,
+            twitter_username: 1,
+            category_code: 1,
+            number_of_employees: 1,
+            founded_year: 1,
+            founded_month: 1,
+            founded_day: 1,
+            deadpooled_year: 1,
+            deadpooled_month: 1,
+            deadpooled_day: 1,
+            deadpooled_url: 1,
+            tag_list: 1,
+            alias_list: 1,
+            email_address: 1,
+            phone_number: 1,
+            description: 1,
+            created_at: 1,
+            updated_at: 1,
+            overview: 1,
+          },
+        },
         {
           $sort: {
             count: -1,
@@ -49,12 +70,12 @@ export default class AirDAO {
           readConcern,
         })
       ).toArray();
-      const totalNumMovies = await companies.countDocuments();
+      const totalNumResults: number = await companies.countDocuments();
 
-      return { companies: await _companies, totalNumMovies };
+      return { companiesList: _companies, totalNumResults };
     } catch (e) {
       console.error(`Unable to convert cursor to array or problem counting documents, ${e}`);
-      return { companiesList: [], totalNumMovies: 0 };
+      return { companiesList: [], totalNumResults: 0 };
     }
   }
 }
@@ -91,37 +112,3 @@ interface GetAirCompanies {
   companiesList: Company[];
   totalNumResults: number;
 }
-
-/**
- * This is a parsed query, sort, and project bundle.
- * @typedef QueryParams
- * @property {Object} query - The specified query, transformed accordingly
- * @property {any[]} sort - The specified sort
- * @property {Object} project - The specified project, if any
- */
-
-/**
- * Represents a single country result
- * @typedef CountryResult
- * @property {string} ObjectID - The ObjectID of the movie
- * @property {string} title - The title of the movie
- */
-
-/**
- * IMDB subdocument
- * @typedef IMDB
- * @property {number} rating
- * @property {number} votes
- * @property {number} id
- */
-
-/**
- * Faceted Search Return
- *
- * The type of return from faceted search. It will be a single document with
- * 3 fields: rating, runtime, and movies.
- * @typedef FacetedSearchReturn
- * @property {object} rating
- * @property {object} runtime
- * @property {MFlixMovie[]}movies
- */
