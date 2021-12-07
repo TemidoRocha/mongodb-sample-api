@@ -9,18 +9,22 @@
   "author": "Manuel Temido Rocha",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.1"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/helmet": "^4.0.0",
+    "@types/jsonwebtoken": "^8.5.6",
     "@types/mongodb": "^4.0.7",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^16.11.11",
