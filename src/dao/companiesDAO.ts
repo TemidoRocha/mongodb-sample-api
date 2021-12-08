@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb';
-import { Company, Filters, Pagination, GetAirCompanies } from '../interfaces/air.interfaces';
+import { Company, GetCompanies } from '../interfaces/companies.interfaces';
+import { Pagination } from '../interfaces/general.interfaces';
 
 let companies: any;
-const DEFAULT_SORT = [['tomatoes.viewer.numReviews', -1]];
 
 export default class AirDAO {
   static async injectDB(conn: MongoClient) {
@@ -19,10 +19,10 @@ export default class AirDAO {
   /**
    * Finds and returns companies by name.
    * Returns a list of objects, each object contains a title and an _id.
-   * @returns {getAirCompanies} An object with movie results and total results
+   * @returns {getCompanies} An object with movie results and total results
    * that would match this query
    */
-  static async getAirCompanies(airSearchConfig: Pagination): Promise<GetAirCompanies> {
+  static async getCompanies(searchConfig: Pagination): Promise<GetCompanies> {
     try {
       const pipeline = [
         {
@@ -60,10 +60,10 @@ export default class AirDAO {
           },
         },
         {
-          $skip: airSearchConfig.page * airSearchConfig.VALUES_PER_PAGE,
+          $skip: searchConfig.page * searchConfig.VALUES_PER_PAGE,
         },
         {
-          $limit: airSearchConfig.VALUES_PER_PAGE,
+          $limit: searchConfig.VALUES_PER_PAGE,
         },
       ];
 
@@ -79,8 +79,8 @@ export default class AirDAO {
       return {
         companiesList: _companies,
         totalNumResults,
-        page: airSearchConfig.page,
-        entries_per_page: airSearchConfig.VALUES_PER_PAGE,
+        page: searchConfig.page,
+        entries_per_page: searchConfig.VALUES_PER_PAGE,
       };
     } catch (e) {
       console.error(`Unable to convert cursor to array or problem counting documents, ${e}`);

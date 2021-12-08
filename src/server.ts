@@ -12,7 +12,7 @@ import 'express-async-errors';
 
 dotenv.config();
 
-import airCompanies from './api/air.route';
+import companies from './api/companies.route';
 import errorHandler from './errors/handler';
 
 /**
@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(errorHandler);
 
 // Register api routes
-app.use('/api/v1/aircompanies', airCompanies);
+app.use('/api/v1/companies', companies);
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
 export default app;

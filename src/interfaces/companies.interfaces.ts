@@ -1,16 +1,5 @@
 import { ObjectId } from 'mongodb';
 
-export interface Filters {
-  genre?: string;
-  cast?: string;
-  text?: string;
-}
-
-export interface Pagination {
-  page: number;
-  VALUES_PER_PAGE: number;
-}
-
 export interface Company {
   _id: ObjectId;
   name: string;
@@ -39,7 +28,7 @@ export interface Company {
   overview: string;
 }
 
-export interface GetAirCompanies {
+export interface GetCompanies {
   companiesList: Company[];
   totalNumResults: number;
   page: number;

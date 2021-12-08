@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import AirCtrl from './air.controller';
+import CompaniesCtrl from './companies.controller';
 
 const router = Router();
 
 // associate put, delete, and get(id)
-router.route('/').get(AirCtrl.apiGetRoutes);
+router.route('/').get(CompaniesCtrl.apiGetRoutes);
 
 export default router;

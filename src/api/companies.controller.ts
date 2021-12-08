@@ -1,11 +1,11 @@
-import AirDAO from '../dao/airDAO';
+import CompaniesDAO from '../dao/companiesDAO';
 import SearchServices from '../services/searchServices.services';
 import { Request, Response, NextFunction } from 'express';
 
-export default class MoviesController {
+export default class CompaniesController {
   static async apiGetRoutes(req: Request, res: Response, next: NextFunction) {
     const airSearchConfig = SearchServices.searchPagination(req, res);
-    const airCompanies = await AirDAO.getAirCompanies(airSearchConfig);
+    const airCompanies = await CompaniesDAO.getCompanies(airSearchConfig);
     res.json(airCompanies);
   }
 }

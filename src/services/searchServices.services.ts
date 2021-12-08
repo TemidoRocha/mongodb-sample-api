@@ -1,4 +1,4 @@
-import { Pagination } from '../interfaces/air.interfaces';
+import { Pagination } from '../interfaces/general.interfaces';
 import { Request, Response } from 'express';
 
 export default class SearchServices {
