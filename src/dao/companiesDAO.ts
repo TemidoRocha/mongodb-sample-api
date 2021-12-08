@@ -1,10 +1,10 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, Document } from 'mongodb';
 import { Company, GetCompanies } from '../interfaces/companies.interfaces';
 import { Pagination } from '../interfaces/general.interfaces';
 
-let companies: any;
+let companies: Document;
 
-export default class AirDAO {
+export default class CompaniesDAO {
   static async injectDB(conn: MongoClient) {
     if (companies) {
       return;

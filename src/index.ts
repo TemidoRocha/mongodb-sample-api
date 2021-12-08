@@ -4,6 +4,7 @@
 import app from './server';
 import { MongoClient } from 'mongodb';
 import CompaniesDAO from '../src/dao/companiesDAO';
+import AirDAO from '../src/dao/airDAO';
 
 /**
  * Variables
@@ -22,6 +23,8 @@ async function initiate(): Promise<void> {
 
     await client.connect();
     await CompaniesDAO.injectDB(client);
+    await AirDAO.injectDB(client);
+
     app.listen(PORT, () => {
       console.log(`Listen on port ${PORT}`);
     });
