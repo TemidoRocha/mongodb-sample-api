@@ -3,6 +3,9 @@
 Using the mongoDb sample data, this api will be a ongoing project to implement a MongoDb
 (with full mongoDB drivers), typescript Api to check all possible options of this tools.
 
+It can be used for your own development and training using the following link:
+https://mongodb-sampli-api.herokuapp.com/
+
 <hr>
 
 To start: https://auth0.com/blog/node-js-and-typescript-tutorial-build-a-crud-api/
@@ -36,3 +39,4 @@ A service lets you encapsulate related business logic that you can share across 
 
 - implement the number of source airports for the getCarriersByRouteandAlliance
 - implement the number of destination airports for the getDstCarriersAirlinesBySrcAirport
+- implement swagger
